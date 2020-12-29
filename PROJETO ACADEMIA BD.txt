@@ -1,0 +1,96 @@
+ PROJETO BANCO DE DADOS ACADEMIA
+
+
+((( BANCO DE DADOS )))
+
+create database academia;
+default character set utf8
+default collate utf8_general_ci
+
+((( CRIAÇÃO DAS TABELAS )))
+
+TABELA 1
+
+create table ALUNO
+id int not null auto_increment,
+nome varchar(30) not null,
+idade date,
+sexo enum ('M', 'F'),
+endereco varchar(20),
+cpf decimal(10),
+telefone decimal(10)
+primary key (id),
+) default charset = utf8;
+
+TABELA 2
+
+create table plano (
+plano varchar(20),
+meses decimal(5,2),
+mensalidade decimal(4,2) 
+);	
+
+((( INSERÇÃO DE DADOS )))
+
+insert into aluno 1
+(id, nome, idade, sexo, endereco, cpf, telefone)
+values
+('Priscila', '1992-15-03', 'F', 'rua elisios', '45456666', '4578956');
+
+
+select * from aluno;
+);	
+
+insert into aluno 2
+(id, nome, idade, sexo, endereco, cpf, telefone)
+values
+('Marcelo', '1995-10-03', 'M', 'rua castelo', '45445666', '4777956');
+
+
+select * from aluno;
+
+insert into plano value
+('1', 'gold', '70.00', '2')
+('2', 'premium', '90.00', '5');
+use academia;
+select * from plano;
+
+alter table aluno add column modalidade int;
+
+alter table aluno
+add foreign key (modalidade)
+references plano(idplano);
+
+update aluno set modalidade = '1' where id = '1';
+update aluno set modalidade = '2' where id = '2';
+
+((( TABELA 3 )))
+
+create table aluno_faz_o_plano (
+id int not null auto_increment,
+data date,
+idaluno int,
+idplano int,
+primary key (id),
+foreign key (idaluno) references aluno(id),
+foreign key (idplano) references plano(idplano)
+) default charset = utf8;
+
+insert into aluno_faz_o_plano values
+(default, '2014-03-01', '1', '2'),
+(default, '2020-03-05', '2','1');
+
+
+select * from aluno_faz_o_plano;
+
+CONSULTAS
+
+desc aluno;
+
+desc plano;
+
+select * from aluno; 
+select * from plano;
+
+select aluno.nome, aluno.cpf, plano.plano, plano.totaulas from aluno join plano
+on plano.idplano = aluno.modalidade;
